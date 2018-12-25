@@ -16,6 +16,8 @@ public class Naloga9 {
                     new FileReader(args[0])
             );
 
+
+
             PrintWriter izhod = new PrintWriter(
                     new FileWriter(args[1])
             );
