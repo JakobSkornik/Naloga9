@@ -58,31 +58,10 @@ class Struct {
 
         lista[a].prijatelji.addAll(lista[b].prijatelji);
 
-        for (Node x : lista) {
-
-            if (x != null)
-                x.prijatelji.addAll(lista[a].prijatelji);
-        }
+        for (int iterate : lista[a].prijatelji)
+            lista[iterate].prijatelji.addAll(lista[a].prijatelji);
 
         return false;
-    }
-
-    public void izpisi () {
-
-        for (Node i : lista){
-
-            if (i != null) {
-
-                System.out.printf("ID: %d\n", i.id);
-
-                for (int j : i.prijatelji) {
-
-                    System.out.printf("%d, ", j);
-                }
-                System.out.println();
-            }
-        }
-        System.out.println("_____________________");
     }
 }
 
