@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-//java Naloga9 C:\Users\User\Desktop\test.txt C:\Users\User\Desktop\out.txt
+//java Naloga9 C:\Users\Jakob\Desktop\test.txt C:\Users\Jakob\Desktop\izhod1.txt
 
 class Struct {
 
@@ -77,7 +77,7 @@ class Struct {
         //expand the circle of friends to all people that are in a's circle of friends
 
         for (int iterate : lista[a].prijatelji)
-            lista[iterate].prijatelji.addAll(lista[a].prijatelji);
+            lista[iterate].prijatelji = lista[a].prijatelji;
 
         return false;
     }
