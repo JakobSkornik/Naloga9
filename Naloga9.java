@@ -6,25 +6,23 @@ class Struct {
     //struct contains array of nodes
     //each node represents a person and contains his id and a set of his friends
 
-    Node[] array_of_people;
+    HashMap<Integer, Node> array_of_people;
 
     class Node {
 
-        int id;
         Set<Integer> friends;
 
-        Node (int id, Set<Integer> friends) {
+        Node (Set<Integer> friends) {
 
-            this.id = id;
             this.friends = friends;
         }
     }
 
     public void init (int st) {
 
-        //maximum amount of possible nodes out of N pairs is 2*N + 1 (+1 as id's start with 1, not with 0)
+        //maximum amount of possible nodes out of N pairs is 2*N
 
-        array_of_people = new Node[st * 2 + 1];
+        array_of_people = new HashMap<>(st * 2);
     }
 
     public void work (String data, PrintWriter output) {
@@ -38,20 +36,20 @@ class Struct {
         //if a node with id "a" or "b" doesn't exist, it's created here
         //each person is also friend with himself, this ensures that when expanding someones circle of friends, everyone is added
 
-        if (array_of_people[a] == null) {
+        if (array_of_people.get(a) == null) {
 
-            Node an = new Node(a, null);
+            Node an = new Node(null);
             an.friends = new HashSet<>();
-            array_of_people[a] = an;
             an.friends.add(a);
+            array_of_people.put(a, an);
         }
 
-        if (array_of_people[b] == null) {
+        if (array_of_people.get(b) == null) {
 
-            Node bn = new Node(b, null);
+            Node bn = new Node(null);
             bn.friends = new HashSet<>();
-            array_of_people[b] = bn;
             bn.friends.add(b);
+            array_of_people.put(b, bn);
         }
 
         //friendship between a and b is added here, add(a,b) returns true if such friendship is already present
@@ -65,17 +63,17 @@ class Struct {
 
         //if a and b are already friends, return true
 
-        if (array_of_people[a].friends.contains(b))
+        if (array_of_people.get(a).friends.contains(b))
             return true;
 
         //add all b's friends to a
 
-        array_of_people[a].friends.addAll(array_of_people[b].friends);
+        array_of_people.get(a).friends.addAll(array_of_people.get(b).friends);
 
         //expand the circle of friends to all people that are in a's circle of friends
 
-        for (int iterate : array_of_people[a].friends)
-            array_of_people[iterate].friends = array_of_people[a].friends;
+        for (int iterate : array_of_people.get(a).friends)
+            array_of_people.get(iterate).friends = array_of_people.get(a).friends;
 
         return false;
     }
